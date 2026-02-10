@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine’s Aira</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(to bottom, #fff8dc, #fff);
+        overflow: hidden;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 3rem;
+        color: #d4a017;
+        animation: fadeIn 2s ease-in-out forwards;
+        z-index: 2;
+        text-align: center;
+    }
+
+    h2 {
+        color: #8b7500;
+        margin-top: 10px;
+        animation: fadeIn 3s ease-in-out forwards;
+        z-index: 2;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tulip {
+        position: absolute;
+        bottom: -120px;
+        cursor: pointer;
+        animation: floatUp 10s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(0.8);
+            opacity: 0;
+        }
+        20% { opacity: 1; }
+        100% {
+            transform: translateY(-120vh) scale(1);
+            opacity: 0;
+        }
+    }
+
+    .flower {
+        width: 40px;
+        height: 50px;
+        background: #ffcc33;
+        border-radius: 50% 50% 40% 40%;
+        position: relative;
+        transition: transform 0.5s ease;
+    }
+
+    .petal {
+        position: absolute;
+        width: 40px;
+        height: 50px;
+        background: #ffe066;
+        border-radius: 50% 50% 40% 40%;
+        top: 0;
+        transition: transform 0.6s ease;
+    }
+
+    .petal.left {
+        left: -18px;
+        transform: rotate(0deg);
+    }
+
+    .petal.right {
+        right: -18px;
+        transform: rotate(0deg);
+    }
+
+    .bloom .petal.left {
+        transform: rotate(-35deg);
+    }
+
+    .bloom .petal.right {
+        transform: rotate(35deg);
+    }
+
+    .stem {
+        width: 6px;
+        height: 60px;
+        background: #4caf50;
+        margin: 0 auto;
+    }
+</style>
+</head>
+<body>
+
+<h1>Happy Valentine’s, Aira 💛</h1>
+<h2>Tap a tulip to make it bloom 🌷</h2>
+
+<script>
+    function createTulip() {
+        const tulip = document.createElement("div");
+        tulip.className = "tulip";
+        tulip.style.left = Math.random() * 100 + "vw";
+        tulip.style.animationDuration = (8 + Math.random() * 5) + "s";
+
+        tulip.innerHTML = `
+            <div class="flower">
+                <div class="petal left"></div>
+                <div class="petal right"></div>
+            </div>
+            <div class="stem"></div>
+        `;
+
+        tulip.addEventListener("click", () => {
+            tulip.querySelector(".flower").classList.toggle("bloom");
+        });
+
+        document.body.appendChild(tulip);
+
+        setTimeout(() => {
+            tulip.remove();
+        }, 13000);
+    }
+
+    setInterval(createTulip, 900);
+</script>
+
+</body>
+</html>
